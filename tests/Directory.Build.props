@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Naming rules ignore test members (per-test _underscore helpers, etc.). -->
+    <NoWarn>$(NoWarn);CA1707;CA1062;CA1034;CS1591;EnableGenerateDocumentationFile</NoWarn>
+  </PropertyGroup>
+
+</Project>

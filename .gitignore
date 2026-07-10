@@ -1,0 +1,86 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+*.log
+*.binlog
+*.tmp
+*.temp
+*.cache
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+.tmp/
+.claude/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Test results
+TestResults/
+.vstest/
+*.trx
+*.coverage
+*.coveragexml
+*.cobertura.xml
+*.opencover.xml
+*.lcov
+coverage.cobertura.xml
+coverage.opencover.xml
+lcov.info
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Repository-local generated output
+artifacts/
+
+# Generated files
+*.generated.cs
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Local environment / secrets
+.env
+.env.*
+appsettings.Development.json
+secrets.json
+
+# Coverage / reports
+coverage/
+coverage-report/
+
+# Publish output
+publish/
+
+# DotNet tool artifacts
+.dotnet/
+
+# BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# Static analysis tools
+.sonarqube/
+.scannerwork/
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user

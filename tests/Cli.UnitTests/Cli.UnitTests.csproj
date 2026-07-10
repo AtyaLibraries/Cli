@@ -1,0 +1,14 @@
+<Project Sdk="Atya.Build.Sdk">
+
+  <!-- Framework, analyzers, and default test packages are provided by Atya.Build.Sdk. -->
+
+  <PropertyGroup>
+    <AssemblyName>Atya.Tooling.Cli.UnitTests</AssemblyName>
+    <RootNamespace>Atya.Tooling.Cli.UnitTests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Cli\Cli.csproj" />
+  </ItemGroup>
+
+</Project>

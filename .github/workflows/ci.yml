@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [development, master]
+  pull_request:
+    branches: [development, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  ci:
+    uses: AtyaLibraries/github-workflows/.github/workflows/dotnet-package-ci.yml@950f73c1f1fc997bc2d5c83d68c1729f748a0f77
+    with:
+      solution: ./Cli.sln
+      test-project: ./tests/Cli.UnitTests/Cli.UnitTests.csproj
+      package-project: ./src/Cli/Cli.csproj
+      fail-on-coverage: true
+      coverage-line-min: 90
+      coverage-branch-min: 80

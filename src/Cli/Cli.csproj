@@ -1,0 +1,39 @@
+<Project Sdk="Atya.Build.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Atya.Tooling.Cli</AssemblyName>
+    <PackageId>Atya.Tooling.Cli</PackageId>
+    <RootNamespace>Atya.Tooling.Cli</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <IsPackable>true</IsPackable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>atya</ToolCommandName>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>Arsen Asulyan</Authors>
+    <Company>Atya</Company>
+    <Copyright>Copyright (c) 2026 Arsen Asulyan</Copyright>
+    <Description>A read-only maintainer CLI for validating Atya package repositories and release state.</Description>
+    <PackageTags>dotnet;atya;cli;tooling;release</PackageTags>
+    <RepositoryUrl>https://github.com/AtyaLibraries/Cli</RepositoryUrl>
+    <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+    <!-- Set PackageValidationBaselineVersion to the last stable package version after first stable release. -->
+    <!-- <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion> -->
+
+    <!-- MinVer derives the version from git tags (e.g. tag `v1.2.3` -> 1.2.3). -->
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <MinVerDefaultPreReleaseIdentifiers>alpha.0</MinVerDefaultPreReleaseIdentifiers>
+    <NoWarn Condition="'$(RepositoryUrl)' != '' And $(RepositoryUrl.Contains('__'))">$(NoWarn);CA1707;SA1300</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Atya.Tooling.Cli.UnitTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>
