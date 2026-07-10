@@ -592,7 +592,15 @@ internal sealed class DoctorChecker
             var name = Path.GetFileName(directory);
             if (name is "artifacts" or "BenchmarkDotNet.Artifacts" or "TestResults")
             {
-                builder.Fail("REPO-001", DiagnosticSeverity.Error, $"Forbidden committed output directory present: {Path.GetRelativePath(repository.Root, directory)}", directory);
+                var relative = Path.GetRelativePath(repository.Root, directory);
+                if (HasTrackedContent(repository.Root, relative))
+                {
+                    builder.Fail("REPO-001", DiagnosticSeverity.Error, $"Forbidden committed output directory present: {relative}", directory);
+                }
+                else
+                {
+                    builder.AddPassed(1);
+                }
             }
         }
 
@@ -817,6 +825,37 @@ internal sealed class DoctorChecker
     private static bool IsSdkVersion(string? version) => version is not null && Regex.IsMatch(version, @"^10\.0\.3\d\d$");
 
     private static bool IsAtLeast(string? value, Version minimum) => Version.TryParse(value, out var version) && version >= minimum;
+
+    private static bool HasTrackedContent(string root, string relativePath)
+    {
+        if (!Directory.Exists(Path.Combine(root, ".git")))
+        {
+            return true;
+        }
+
+        var startInfo = new ProcessStartInfo("git")
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            WorkingDirectory = root,
+        };
+        startInfo.ArgumentList.Add("-c");
+        startInfo.ArgumentList.Add($"safe.directory={root.Replace('\\', '/')}");
+        startInfo.ArgumentList.Add("ls-files");
+        startInfo.ArgumentList.Add("--");
+        startInfo.ArgumentList.Add(relativePath.Replace('\\', '/'));
+
+        using var process = Process.Start(startInfo);
+        if (process is null)
+        {
+            return true;
+        }
+
+        var output = process.StandardOutput.ReadToEnd();
+        process.WaitForExit();
+        return process.ExitCode != 0 || !string.IsNullOrWhiteSpace(output);
+    }
 
     private sealed class PackageVersionPin
     {
