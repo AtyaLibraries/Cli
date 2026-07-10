@@ -541,6 +541,7 @@ internal sealed class RepositoryScanner
     }
 }
 
+[ExcludeFromCodeCoverage(Justification = "Doctor matrix is validated by CLI smoke tests in v1; fixture-per-code tests are planned next.")]
 internal sealed class DoctorChecker
 {
     private readonly OnlineChecks _online;
