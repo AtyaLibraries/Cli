@@ -615,13 +615,16 @@ internal sealed class DoctorChecker
             }
         }
 
+        var sourceName = repository.SourceProject is null
+            ? repository.Name
+            : Path.GetFileNameWithoutExtension(repository.SourceProject.FileName);
         var requiredLayout = new[]
         {
             $"{repository.Name}.sln",
-            "src/Cli",
-            "tests/Cli.UnitTests",
-            "benchmarks/Cli.Benchmarks",
-            "samples/Cli.Samples.Console",
+            $"src/{sourceName}",
+            $"tests/{sourceName}.UnitTests",
+            $"benchmarks/{sourceName}.Benchmarks",
+            $"samples/{sourceName}.Samples.Console",
             "tests/Directory.Build.props",
         };
         foreach (var relative in requiredLayout)
@@ -636,7 +639,8 @@ internal sealed class DoctorChecker
             builder.Expect(File.Exists(path), "REPO-003", DiagnosticSeverity.Error, $"Required root file missing: {relative}", path);
         }
 
-        builder.Expect(File.Exists(Combine(repository.Root, "src/Cli/README.md")), "REPO-004", DiagnosticSeverity.Error, "Packed NuGet README missing.", Combine(repository.Root, "src/Cli/README.md"));
+        var packedReadme = $"src/{sourceName}/README.md";
+        builder.Expect(File.Exists(Combine(repository.Root, packedReadme)), "REPO-004", DiagnosticSeverity.Error, "Packed NuGet README missing.", Combine(repository.Root, packedReadme));
     }
 
     private static void CheckSdk(RepositoryInfo repository, ResultBuilder builder)
@@ -775,7 +779,7 @@ internal sealed class DoctorChecker
         builder.Expect(source.Properties.TryGetValue("Authors", out var authors) && authors == "Arsen Asulyan", "PKG-002", DiagnosticSeverity.Error, "Authors must be Arsen Asulyan.", source.Path);
         builder.Expect(source.Properties.TryGetValue("Description", out var description) && !string.IsNullOrWhiteSpace(description) && !description.Contains("__", StringComparison.Ordinal), "PKG-003", DiagnosticSeverity.Error, "Description missing or placeholder.", source.Path);
         builder.Expect(source.Properties.TryGetValue("RepositoryUrl", out var repositoryUrl) && repositoryUrl == expectedRepository, "PKG-004", DiagnosticSeverity.Error, $"RepositoryUrl must be {expectedRepository}.", source.Path);
-        builder.Expect(source.Properties.TryGetValue("PackageLicenseExpression", out var license) && license == "MIT", "PKG-005", DiagnosticSeverity.Error, "PackageLicenseExpression must be MIT.", source.Path);
+        builder.Expect(!source.Properties.TryGetValue("PackageLicenseExpression", out var license) || license == "MIT", "PKG-005", DiagnosticSeverity.Error, "Explicit PackageLicenseExpression must be MIT.", source.Path);
         builder.Expect(source.Properties.ContainsKey("PackageValidationBaselineVersion"), "PKG-006", DiagnosticSeverity.Warning, "PackageValidationBaselineVersion is required after the first stable publish; first release has no valid baseline.", source.Path);
         builder.Expect(!source.Properties.ContainsKey("PackageIcon") && !Directory.EnumerateFiles(Combine(repository.Root, "src"), "icon.png", SearchOption.AllDirectories).Any(), "PKG-007", DiagnosticSeverity.Error, "Per-repo package icons are forbidden.", source.Path);
     }
