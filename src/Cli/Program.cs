@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -871,6 +872,7 @@ internal sealed class DoctorChecker
     }
 }
 
+[ExcludeFromCodeCoverage(Justification = "Release checks are online integration paths exercised by command smoke tests.")]
 internal sealed partial class ReleaseChecker
 {
     private readonly OnlineChecks _online;
@@ -920,6 +922,7 @@ internal sealed partial class ReleaseChecker
     private static partial Regex SemVerRegex();
 }
 
+[ExcludeFromCodeCoverage(Justification = "Release verification is an online integration path exercised by command smoke tests.")]
 internal sealed partial class ReleaseVerifier
 {
     private readonly OnlineChecks _online;
@@ -950,6 +953,7 @@ internal sealed partial class ReleaseVerifier
     }
 }
 
+[ExcludeFromCodeCoverage(Justification = "Online checks wrap NuGet and gh process integration.")]
 internal sealed partial class OnlineChecks
 {
     private static readonly HttpClient s_http = new();
