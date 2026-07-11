@@ -1,0 +1,11 @@
+NAME
+  FAIL NAME-001: PackageId does not match the Atya naming regex.
+  FAIL NAME-003: Area segment is not allowed by the constitution.
+PKG
+  FAIL PKG-004: RepositoryUrl must be https://github.com/AtyaLibraries/Acid.
+  WARN PKG-006: PackageValidationBaselineVersion is required after the first stable publish; first release has no valid baseline.
+REL
+  INFO REL-001: REL checks skipped because --online was not passed.
+  INFO REL-002: REL checks skipped because --online was not passed.
+  INFO REL-003: REL checks skipped because --online was not passed.
+Failed with 3 errors, 1 warnings, 48 passed, 3 skipped.

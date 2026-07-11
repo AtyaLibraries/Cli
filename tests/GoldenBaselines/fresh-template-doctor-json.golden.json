@@ -1,0 +1,62 @@
+{
+  "status": "failed",
+  "workingDirectory": "<WORKING_DIRECTORY>",
+  "constitutionVersion": "1.2.0",
+  "summary": {
+    "passed": 48,
+    "warnings": 1,
+    "errors": 3,
+    "skipped": 3
+  },
+  "findings": [
+    {
+      "code": "NAME-001",
+      "severity": "Error",
+      "message": "PackageId does not match the Atya naming regex.",
+      "file": "<WORKING_DIRECTORY>\\src\\Acid\\Acid.csproj",
+      "recommendation": null
+    },
+    {
+      "code": "NAME-003",
+      "severity": "Error",
+      "message": "Area segment is not allowed by the constitution.",
+      "file": "<WORKING_DIRECTORY>\\src\\Acid\\Acid.csproj",
+      "recommendation": null
+    },
+    {
+      "code": "PKG-004",
+      "severity": "Error",
+      "message": "RepositoryUrl must be https://github.com/AtyaLibraries/Acid.",
+      "file": "<WORKING_DIRECTORY>\\src\\Acid\\Acid.csproj",
+      "recommendation": null
+    },
+    {
+      "code": "PKG-006",
+      "severity": "Warning",
+      "message": "PackageValidationBaselineVersion is required after the first stable publish; first release has no valid baseline.",
+      "file": "<WORKING_DIRECTORY>\\src\\Acid\\Acid.csproj",
+      "recommendation": null
+    },
+    {
+      "code": "REL-001",
+      "severity": "Info",
+      "message": "REL checks skipped because --online was not passed.",
+      "file": null,
+      "recommendation": null
+    },
+    {
+      "code": "REL-002",
+      "severity": "Info",
+      "message": "REL checks skipped because --online was not passed.",
+      "file": null,
+      "recommendation": null
+    },
+    {
+      "code": "REL-003",
+      "severity": "Info",
+      "message": "REL checks skipped because --online was not passed.",
+      "file": null,
+      "recommendation": null
+    }
+  ]
+}
