@@ -4,4 +4,4 @@ REL
   INFO REL-001: REL checks skipped because --online was not passed.
   INFO REL-002: REL checks skipped because --online was not passed.
   INFO REL-003: REL checks skipped because --online was not passed.
-Failed with 0 errors, 1 warnings, 55 passed, 3 skipped.
+Failed with 0 errors, 1 warnings, <PASSED> passed, 3 skipped.

@@ -61,10 +61,6 @@ internal sealed partial class DoctorChecker
                 {
                     builder.Fail("REPO-001", DiagnosticSeverity.Error, $"Forbidden committed output directory present: {relative}", directory);
                 }
-                else
-                {
-                    builder.AddPassed(1);
-                }
             }
         }
 

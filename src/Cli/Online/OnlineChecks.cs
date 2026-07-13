@@ -58,6 +58,19 @@ internal sealed partial class OnlineChecks
 
     internal async Task<bool> IsMasterCiGreenAsync(string repo) => await IsBranchCiGreenAsync(repo, "master").ConfigureAwait(false);
 
+    internal async Task<bool> IsRepositoryPrivateAsync(string repo)
+    {
+        var metadata = await GhJsonAsync($"repos/AtyaLibraries/{repo}").ConfigureAwait(false);
+        return metadata.RootElement.GetProperty("private").GetBoolean();
+    }
+
+    internal async Task<bool> HasPublisherDispatchSecretAccessAsync(string repo)
+    {
+        var grants = await GhJsonAsync("orgs/AtyaLibraries/actions/secrets/PUBLISHER_DISPATCH_TOKEN/repositories?per_page=100").ConfigureAwait(false);
+        return grants.RootElement.GetProperty("repositories").EnumerateArray()
+            .Any(repository => StringComparer.OrdinalIgnoreCase.Equals(repository.GetProperty("full_name").GetString(), $"AtyaLibraries/{repo}"));
+    }
+
     internal async Task<string?> GetDevelopmentBaselineAsync(string repo)
     {
         var tree = await GhJsonAsync($"repos/AtyaLibraries/{repo}/git/trees/development?recursive=1").ConfigureAwait(false);

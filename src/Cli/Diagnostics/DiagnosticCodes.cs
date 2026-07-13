@@ -42,6 +42,8 @@ internal static class DiagnosticCodes
     internal const string RelChk004 = "RELCHK-004";
     internal const string RelChk005 = "RELCHK-005";
     internal const string RelChk006 = "RELCHK-006";
+    internal const string RelChk007 = "RELCHK-007";
+    internal const string RelChk008 = "RELCHK-008";
     internal const string Verify001 = "VERIFY-001";
     internal const string Verify002 = "VERIFY-002";
     internal const string Verify003 = "VERIFY-003";

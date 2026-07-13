@@ -44,6 +44,8 @@ internal static class CheckCatalog
         ReleaseCheck(DiagnosticCodes.RelChk004, "versioningAndReleasePolicy"),
         ReleaseCheck(DiagnosticCodes.RelChk005, "ciCd"),
         ReleaseCheck(DiagnosticCodes.RelChk006, "versioningAndReleasePolicy"),
+        ReleaseCheck(DiagnosticCodes.RelChk007, DiagnosticSeverity.Warning, "ciCd"),
+        ReleaseCheck(DiagnosticCodes.RelChk008, DiagnosticSeverity.Warning, "ciCd"),
         Verify(DiagnosticCodes.Verify001, "versioningAndReleasePolicy"),
         Verify(DiagnosticCodes.Verify002, "versioningAndReleasePolicy"),
         Verify(DiagnosticCodes.Verify003, "versioningAndReleasePolicy"),
@@ -56,7 +58,10 @@ internal static class CheckCatalog
         => new(code, severity, section, "doctor", requiresOnline);
 
     private static DiagnosticCodeDescriptor ReleaseCheck(string code, string section)
-        => new(code, DiagnosticSeverity.Error, section, "release check", requiresOnline: true);
+        => ReleaseCheck(code, DiagnosticSeverity.Error, section);
+
+    private static DiagnosticCodeDescriptor ReleaseCheck(string code, DiagnosticSeverity severity, string section)
+        => new(code, severity, section, "release check", requiresOnline: true);
 
     private static DiagnosticCodeDescriptor Verify(string code, string section)
         => new(code, DiagnosticSeverity.Error, section, "release verify", requiresOnline: true);

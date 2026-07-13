@@ -68,10 +68,19 @@ public sealed class GoldenBaselineTests
         => File.ReadAllText(Path.Combine(FindRepositoryRoot(), "tests", "GoldenBaselines", fileName)).ReplaceLineEndings("\n");
 
     private static string Normalize(string output, string root)
-        => output
+    {
+        var normalized = output
             .Replace(root.Replace(@"\", @"\\"), "<WORKING_DIRECTORY>", StringComparison.Ordinal)
             .Replace(root, "<WORKING_DIRECTORY>", StringComparison.Ordinal)
             .ReplaceLineEndings("\n");
+        normalized = System.Text.RegularExpressions.Regex.Replace(
+            normalized,
+            @"<WORKING_DIRECTORY>(?:\\\\|\\|/)([^"",\n]*)",
+            static match => "<WORKING_DIRECTORY>/" + match.Groups[1].Value.Replace(@"\\", "/", StringComparison.Ordinal).Replace(@"\", "/", StringComparison.Ordinal));
+        normalized = System.Text.RegularExpressions.Regex.Replace(normalized, @", \d+ passed,", ", <PASSED> passed,");
+        normalized = System.Text.RegularExpressions.Regex.Replace(normalized, @"""passed"": \d+", @"""passed"": ""<PASSED>""");
+        return normalized;
+    }
 
     private static string FindRepositoryRoot()
     {

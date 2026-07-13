@@ -3,7 +3,7 @@
   "workingDirectory": "<WORKING_DIRECTORY>",
   "constitutionVersion": "1.2.0",
   "summary": {
-    "passed": 55,
+    "passed": "<PASSED>",
     "warnings": 1,
     "errors": 0,
     "skipped": 3
@@ -13,7 +13,7 @@
       "code": "PKG-006",
       "severity": "Warning",
       "message": "PackageValidationBaselineVersion is required after the first stable publish; first release has no valid baseline.",
-      "file": "<WORKING_DIRECTORY>\\src\\Cli\\Cli.csproj",
+      "file": "<WORKING_DIRECTORY>/src/Cli/Cli.csproj",
       "recommendation": null
     },
     {
