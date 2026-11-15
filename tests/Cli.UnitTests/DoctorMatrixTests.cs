@@ -25,7 +25,7 @@ public sealed class DoctorMatrixTests
         { "CI-001", "missing CodeQL workflow", root => File.Delete(Path.Combine(root, ".github", "workflows", "codeql.yml")) },
         { "CI-002", "workflow uses branch ref", root => ReplaceInFile(Path.Combine(root, ".github", "workflows", "ci.yml"), "@950f73c1f1fc997bc2d5c83d68c1729f748a0f77", "@development") },
         { "CI-003", "coverage line minimum too low", root => ReplaceInFile(Path.Combine(root, ".github", "workflows", "ci.yml"), "coverage-line-min: 90", "coverage-line-min: 80") },
-        { "CI-004", "direct NuGet API key", root => File.AppendAllText(Path.Combine(root, ".github", "workflows", "publish-nuget.yml"), "NUGET_API_KEY") },
+        { "CI-004", "direct NuGet API key", root => File.AppendAllText(Path.Combine(root, ".github", "workflows", "ci.yml"), "NUGET_API_KEY") },
         { "PKG-001", "missing PackageId", root => RemoveSourceProperty(root, "PackageId") },
         { "PKG-002", "wrong Authors", root => SetSourceProperty(root, "Authors", "Atya") },
         { "PKG-003", "placeholder Description", root => SetSourceProperty(root, "Description", "__TODO__") },
@@ -304,7 +304,6 @@ public sealed class DoctorMatrixTests
                 """);
             File.WriteAllText(Path.Combine(root, ".github", "workflows", "codeql.yml"), "name: CodeQL");
             File.WriteAllText(Path.Combine(root, ".github", "workflows", "dependency-review.yml"), "name: Dependency Review");
-            File.WriteAllText(Path.Combine(root, ".github", "workflows", "publish-nuget.yml"), "name: Publish");
         }
     }
 }
