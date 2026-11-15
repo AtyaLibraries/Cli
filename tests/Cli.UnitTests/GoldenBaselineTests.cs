@@ -226,7 +226,6 @@ public sealed class GoldenBaselineTests
                 """);
             File.WriteAllText(Path.Combine(root, ".github", "workflows", "codeql.yml"), "name: CodeQL");
             File.WriteAllText(Path.Combine(root, ".github", "workflows", "dependency-review.yml"), "name: Dependency Review");
-            File.WriteAllText(Path.Combine(root, ".github", "workflows", "publish-nuget.yml"), "name: Publish");
         }
     }
 }

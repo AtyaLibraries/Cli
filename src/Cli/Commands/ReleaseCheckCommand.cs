@@ -34,7 +34,6 @@ internal sealed partial class ReleaseChecker
         builder.Expect(!await _online.NuGetVersionExistsAsync(packageId, normalized).ConfigureAwait(false), "RELCHK-004", DiagnosticSeverity.Error, $"{packageId} {normalized} already exists on nuget.org.", source.Path);
         builder.Expect(await _online.IsDevelopmentCiGreenAsync(repository.Name).ConfigureAwait(false), "RELCHK-005", DiagnosticSeverity.Error, "development CI is not green.", repository.Root);
         builder.Expect(!await _online.IsRepositoryPrivateAsync(repository.Name).ConfigureAwait(false), "RELCHK-007", DiagnosticSeverity.Warning, "Repository is private; package repos must be public so the central publisher can check out release tags.", repository.Root);
-        builder.Expect(await _online.HasPublisherDispatchSecretAccessAsync(repository.Name).ConfigureAwait(false), "RELCHK-008", DiagnosticSeverity.Warning, "Repository is not in PUBLISHER_DISPATCH_TOKEN selected repositories; tag publish dispatch may fail.", repository.Root);
 
         foreach (var dependency in await _online.FindStaleAtyaDependenciesAsync(repository).ConfigureAwait(false))
         {
