@@ -102,7 +102,7 @@ internal sealed partial class DoctorChecker
             var allowPrerelease = json.RootElement.GetPropertyOrNull("sdk")?.GetPropertyOrNull("allowPrerelease")?.GetBoolean();
             var buildSdk = json.RootElement.GetPropertyOrNull("msbuild-sdks")?.GetPropertyOrNull("Atya.Build.Sdk")?.GetString();
 
-            builder.Expect(IsSdkVersion(sdkVersion), "SDK-002", DiagnosticSeverity.Error, "global.json sdk.version must be 10.0.3xx.", globalJson);
+            builder.Expect(IsSdkVersion(sdkVersion), "SDK-002", DiagnosticSeverity.Error, "global.json sdk.version must be 10.0.3xx or 10.0.4xx.", globalJson);
             builder.Expect(rollForward == "latestPatch" && allowPrerelease == false, "SDK-002", DiagnosticSeverity.Error, "global.json must use rollForward latestPatch and allowPrerelease false.", globalJson);
             builder.Expect(IsAtLeast(buildSdk, new Version(1, 5, 2)), "SDK-001", DiagnosticSeverity.Error, "global.json must pin Atya.Build.Sdk >= 1.5.2.", globalJson);
         }
