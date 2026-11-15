@@ -105,6 +105,10 @@ Each finding has `{ code, severity, message, file, recommendation }`.
 | `PKG-*` | `packaging` |
 | `REL-*` | `versioningAndReleasePolicy` |
 
+## Adding A Check
+
+Add the check implementation under the matching `src/Cli/Checks/` or command pipeline folder, add its public diagnostic code to `DiagnosticCodes`, register exactly one descriptor in `CheckCatalog`, and add a focused failing fixture in `DoctorMatrixTests` or the matching release-pipeline test. The catalog meta-tests enforce unique codes and non-empty constitution sections.
+
 ## Constitution Precedence
 
 The CLI follows `platform/specs/ATYA-CLI.md`, with `platform/CONSTITUTION.md` taking precedence where they disagree.

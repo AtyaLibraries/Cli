@@ -1,0 +1,41 @@
+{
+  "status": "warning",
+  "workingDirectory": "<WORKING_DIRECTORY>",
+  "constitutionVersion": "1.2.0",
+  "summary": {
+    "passed": "<PASSED>",
+    "warnings": 1,
+    "errors": 0,
+    "skipped": 3
+  },
+  "findings": [
+    {
+      "code": "PKG-006",
+      "severity": "Warning",
+      "message": "PackageValidationBaselineVersion is required after the first stable publish; first release has no valid baseline.",
+      "file": "<WORKING_DIRECTORY>/src/Cli/Cli.csproj",
+      "recommendation": null
+    },
+    {
+      "code": "REL-001",
+      "severity": "Info",
+      "message": "REL checks skipped because --online was not passed.",
+      "file": null,
+      "recommendation": null
+    },
+    {
+      "code": "REL-002",
+      "severity": "Info",
+      "message": "REL checks skipped because --online was not passed.",
+      "file": null,
+      "recommendation": null
+    },
+    {
+      "code": "REL-003",
+      "severity": "Info",
+      "message": "REL checks skipped because --online was not passed.",
+      "file": null,
+      "recommendation": null
+    }
+  ]
+}
