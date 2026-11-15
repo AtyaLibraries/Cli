@@ -35,7 +35,7 @@ internal sealed partial class DoctorChecker
         }
     }
 
-    private static bool IsSdkVersion(string? version) => version is not null && Regex.IsMatch(version, @"^10\.0\.3\d\d$");
+    private static bool IsSdkVersion(string? version) => version is not null && Regex.IsMatch(version, @"^10\.0\.[34]\d\d$");
 
     private static bool IsAtLeast(string? value, Version minimum) => Version.TryParse(value, out var version) && version >= minimum;
 
