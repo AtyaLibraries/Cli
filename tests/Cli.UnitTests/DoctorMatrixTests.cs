@@ -58,6 +58,36 @@ public sealed class DoctorMatrixTests
             finding.Severity == DiagnosticSeverity.Error);
     }
 
+    [Theory]
+    [InlineData("10.0.301")]
+    [InlineData("10.0.404")]
+    public async Task Doctor_Accepts_Supported_Sdk_Pins(string sdkVersion)
+    {
+        using var fixture = DoctorFixture.Create();
+        WriteGlobalJson(fixture.Root, sdkVersion: sdkVersion);
+
+        var result = await RunDoctorAsync(fixture.Root);
+
+        result.Findings.Should().NotContain(finding => finding.Code == "SDK-002");
+    }
+
+    [Theory]
+    [InlineData("9.0.100")]
+    [InlineData("10.0.200")]
+    [InlineData("10.0.500")]
+    [InlineData("10.1.404")]
+    public async Task Doctor_Rejects_Unsupported_Sdk_Pins(string sdkVersion)
+    {
+        using var fixture = DoctorFixture.Create();
+        WriteGlobalJson(fixture.Root, sdkVersion: sdkVersion);
+
+        var result = await RunDoctorAsync(fixture.Root);
+
+        result.Findings.Should().Contain(finding =>
+            finding.Code == "SDK-002" &&
+            finding.Severity == DiagnosticSeverity.Error);
+    }
+
     private static async Task<CheckResult> RunDoctorAsync(string root)
     {
         var repository = new RepositoryScanner().Scan(root);
