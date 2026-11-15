@@ -5,6 +5,6 @@
     "allowPrerelease": false
   },
   "msbuild-sdks": {
-    "Atya.Build.Sdk": "1.5.2"
+    "Atya.Build.Sdk": "1.5.4"
   }
 }
