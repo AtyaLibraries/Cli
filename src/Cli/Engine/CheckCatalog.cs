@@ -45,7 +45,6 @@ internal static class CheckCatalog
         ReleaseCheck(DiagnosticCodes.RelChk005, "ciCd"),
         ReleaseCheck(DiagnosticCodes.RelChk006, "versioningAndReleasePolicy"),
         ReleaseCheck(DiagnosticCodes.RelChk007, DiagnosticSeverity.Warning, "ciCd"),
-        ReleaseCheck(DiagnosticCodes.RelChk008, DiagnosticSeverity.Warning, "ciCd"),
         Verify(DiagnosticCodes.Verify001, "versioningAndReleasePolicy"),
         Verify(DiagnosticCodes.Verify002, "versioningAndReleasePolicy"),
         Verify(DiagnosticCodes.Verify003, "versioningAndReleasePolicy"),

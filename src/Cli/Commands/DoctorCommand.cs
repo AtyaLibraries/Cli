@@ -189,7 +189,7 @@ internal sealed partial class DoctorChecker
 
     private static void CheckCi(RepositoryInfo repository, ResultBuilder builder)
     {
-        var workflows = new[] { "ci.yml", "codeql.yml", "dependency-review.yml", "publish-nuget.yml" };
+        var workflows = new[] { "ci.yml", "codeql.yml", "dependency-review.yml" };
         foreach (var workflow in workflows)
         {
             builder.Expect(File.Exists(Combine(repository.Root, $".github/workflows/{workflow}")), "CI-001", DiagnosticSeverity.Error, $"Required workflow missing: {workflow}", Combine(repository.Root, $".github/workflows/{workflow}"));
